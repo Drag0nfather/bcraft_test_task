@@ -1,3 +1,5 @@
+import os
+import sys
 from pathlib import Path
 import environ
 
@@ -10,7 +12,7 @@ SECRET_KEY = 'django-insecure-n+*7$!^n1$iwic)p2)kd*)gk+h7-!!r!&_suh#8nw=mt%z#vqd
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['*',]
+ALLOWED_HOSTS = ['*', ]
 
 INSTALLED_APPS = [
     'api.apps.ApiConfig',
@@ -56,16 +58,28 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'bcraft.wsgi.application'
 
-
-DATABASES = {'default': {
-    'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    'NAME': env('NAME'),
-    'USER': env('DB_USER'),
-    'PASSWORD': env('PASSWORD'),
-    'HOST': env('HOST'),
-    'PORT': env('PORT'), }
-}
-
+TESTING = sys.argv[1:2] == ['test']
+if not TESTING:
+    DATABASES = {'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': env('NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('PASSWORD'),
+        'HOST': env('HOST'),
+        'PORT': env('PORT'), },
+        'TEST': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        },
+    }
+else:
+    DATABASES = {
+        'default': {
+            "ENGINE": "django.db.backends.sqlite3",
+            "TEST": {
+                "NAME": os.path.join(BASE_DIR, "test_db.sqlite3"),
+            }
+        }}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
