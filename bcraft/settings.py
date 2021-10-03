@@ -10,7 +10,7 @@ SECRET_KEY = 'django-insecure-n+*7$!^n1$iwic)p2)kd*)gk+h7-!!r!&_suh#8nw=mt%z#vqd
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*',]
 
 INSTALLED_APPS = [
     'api.apps.ApiConfig',
@@ -65,6 +65,7 @@ DATABASES = {'default': {
     'HOST': env('HOST'),
     'PORT': env('PORT'), }
 }
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
