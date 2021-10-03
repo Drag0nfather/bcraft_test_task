@@ -18,7 +18,7 @@ python3 -m venv venv
 
 pip install -r requirements.txt
 ```
-4) Добавьте в директорию bcraft_test_task/bcraft файл .env с необходимыми данными для использования БД PostgresSql, а именно:
+4) Добавьте в директорию bcraft_test_task/bcraft файл .env с необходимыми данными для использования БД PostgreSQL, а именно:
 ```
 NAME=
 DB_USER=
