@@ -1,4 +1,8 @@
 from pathlib import Path
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -53,11 +57,13 @@ TEMPLATES = [
 WSGI_APPLICATION = 'bcraft.wsgi.application'
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+DATABASES = {'default': {
+    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    'NAME': env('NAME'),
+    'USER': env('DB_USER'),
+    'PASSWORD': env('PASSWORD'),
+    'HOST': env('HOST'),
+    'PORT': env('PORT'), }
 }
 
 AUTH_PASSWORD_VALIDATORS = [
